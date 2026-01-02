@@ -12,7 +12,7 @@ export default function Home() {
         />
       </Head>
 
-      {/* ================= HERO ================= */}
+      {/* HERO */}
       <section className="bg-[#FFF0CC]">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -48,7 +48,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= ABOUT ================= */}
+      {/* ABOUT */}
       <section className="bg-white">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-3xl mx-auto text-center">
@@ -62,7 +62,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ================= CARA KERJA ================= */}
+      {/* CARA KERJA */}
       <section className="bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <h2 className="text-center mb-12 md:mb-16 text-2xl md:text-3xl">
