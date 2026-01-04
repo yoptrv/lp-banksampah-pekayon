@@ -1,11 +1,39 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Footer() {
+  const router = useRouter();
+
+  const handleNavigate = async (item) => {
+    if (item.sectionId) {
+      if (router.pathname !== "/") {
+        await router.push("/");
+      }
+
+      setTimeout(() => {
+        const el = document.getElementById(item.sectionId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 300);
+    } else {
+      router.push(item.href);
+    }
+  };
+
+  const footerMenu = [
+    { label: "Jadwal", sectionId: "jadwal" },
+    { label: "Cara Kerja", sectionId: "cara-kerja" },
+    { label: "Kategori Sampah", sectionId: "kategori" },
+    { label: "Tentang", href: "/about" },
+    { label: "FAQs", sectionId: "faq" },
+    { label: "Tanya Kami", href: "/contact" },
+  ];
+
   return (
     <footer className="bg-[#191A23] text-white mt-24 rounded-t-3xl">
       <div className="max-w-7xl mx-auto px-6 py-16">
-        {/* ================= TOP ================= */}
+        {/* ================= TOP */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
           {/* LOGO & NAV */}
           <div>
@@ -20,33 +48,28 @@ export default function Footer() {
             </div>
 
             <ul className="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-300">
-              <li>
-                <Link href="/">Beranda</Link>
-              </li>
-              <li>
-                <Link href="/profil">Profil</Link>
-              </li>
-              <li>
-                <Link href="/riwayat">Riwayat</Link>
-              </li>
-              <li>
-                <Link href="/jadwal">Jadwal</Link>
-              </li>
-              <li>
-                <Link href="/tutorial">Tutorial</Link>
-              </li>
+              {footerMenu.map((item) => (
+                <li key={item.label}>
+                  <button
+                    onClick={() => handleNavigate(item)}
+                    className="hover:text-white transition"
+                  >
+                    {item.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* CONTACT */}
           <div>
-            <span className="inline-block mb-4 px-3 py-1 rounded bg-[#FFF0CC] text-[#191A23] text-sm font-medium">
+            <span className="inline-block mb-4  rounded  text-white text-sm font-medium">
               Hubungi Kami
             </span>
 
             <ul className="space-y-3 text-sm text-gray-300 max-w-sm mx-auto md:mx-0">
               <li>Email: xxxxx@gmail.com</li>
-              <li>Phone: +62-xxx-xxxx-xxxx</li>
+              <li>Telepon: (021) 12345678</li>
               <li>
                 Jl. Madrasah No.3, RT.3/RW.9, Pekayon, Kec. Ps. Rebo, Kota
                 Jakarta Timur, DKI Jakarta 13710
@@ -56,7 +79,7 @@ export default function Footer() {
 
           {/* PARTNERS */}
           <div>
-            <span className="inline-block mb-4 px-3 py-1 rounded bg-[#FFF0CC] text-[#191A23] text-sm font-medium">
+            <span className="inline-block mb-4 px-3 py-1 rounded  text-white text-sm font-medium">
               Pihak Terkait
             </span>
 
@@ -86,28 +109,24 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ================= BOTTOM ================= */}
+        {/* BOTTOM  */}
         <div className="border-t border-gray-700 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-xs text-gray-400">
             © 2025 PTelus. All Rights Reserved.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-gray-400">
-            <Link href="/privacy-policy" className="text-xs hover:text-white">
+            <button
+              onClick={() => router.push("/privacy-policy")}
+              className="text-xs hover:text-white"
+            >
               Privacy Policy
-            </Link>
+            </button>
 
-            {/* SOCIAL */}
             <div className="flex gap-3">
-              <Link href="#" aria-label="LinkedIn" className="hover:text-white">
-                in
-              </Link>
-              <Link href="#" aria-label="Facebook" className="hover:text-white">
-                f
-              </Link>
-              <Link href="#" aria-label="Twitter" className="hover:text-white">
-                x
-              </Link>
+              <button className="hover:text-white">in</button>
+              <button className="hover:text-white">f</button>
+              <button className="hover:text-white">x</button>
             </div>
           </div>
         </div>

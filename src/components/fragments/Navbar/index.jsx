@@ -1,67 +1,113 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Button from "@/components/ui/Button/Button";
 
-const menus = [
-  { label: "Beranda", href: "/" },
-  { label: "Tutorial", href: "/tutorial" },
-  { label: "Jadwal", href: "/jadwal" },
-  { label: "Riwayat", href: "/riwayat" },
-];
-
-export default function Navbar() {
+export default function Navbar({ onMenuClick }) {
+  const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
 
+  useEffect(() => {
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <nav className="sticky top-0 z-50 bg-white border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="h-16 flex items-center justify-between">
-          {/* LEFT — LOGO */}
-          <div className="flex items-center gap-3">
-            <Image
-              src="/kelurahan.png"
-              alt="Kelurahan Pekayon"
-              width={36}
-              height={36}
-            />
-            <span className="font-semibold text-sm sm:text-base">
-              Bank Sampah Pekayon
-            </span>
-          </div>
+    <nav
+      className={`
+        fixed left-0 w-full z-30
+        transition-all duration-300
+        ${scrolled ? "top-3" : "top-0"}
+      `}
+    >
+      <div
+        className={`
+    mx-auto
+    h-14 sm:h-16
+    flex items-center justify-between
+    transition-all duration-300 ease-out
+    ${
+      scrolled
+        ? "max-w-6xl px-6 bg-white/95 backdrop-blur-md text-black rounded-4xl shadow-lg"
+        : "max-w-7xl px-4 sm:px-6 bg-transparent text-white"
+    }
+  `}
+      >
+        {/* LEFT */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          <Image src="/kelurahan.png" alt="" width={32} height={32} />
+          <button
+            type="button"
+            onClick={() => router.push("/")}
+            className={`
+    font-semibold text-sm sm:text-base cursor-pointer
+    transition-colors duration-300
+    ${
+      scrolled
+        ? "text-black hover:text-black/70"
+        : "text-[#213D34] hover:text-black/80"
+    }
+  `}
+          >
+            Kelurahan Pekayon Jakarta
+          </button>
+        </div>
 
-          {/* CENTER — MENU */}
-          <ul className="hidden md:flex items-center gap-6 text-sm font-medium">
-            {menus.map((menu) => {
-              const isActive = router.pathname === menu.href;
+        {/* RIGHT */}
+        <div className="flex items-center gap-4 sm:gap-6">
+          {/* PHONE – DESKTOP ONLY */}
+          {/* <p
+            className={`hidden md:block ${
+              scrolled ? "text-black/70" : "text-white/90"
+            }`}
+          >
+            +62xxxx-xxxx-xxx
+          </p> */}
 
-              return (
-                <li key={menu.label}>
-                  <Link
-                    href={menu.href}
-                    className={`px-4 py-1 rounded-full transition ${
-                      isActive
-                        ? "bg-[#276749] !text-white"
-                        : "text-gray-700 hover:text-[#276749]"
-                    }`}
-                  >
-                    {menu.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          {/* SIGN IN – DESKTOP ONLY */}
+          <button
+            className={`
+    hidden md:block
+    text-sm font-bold cursor-pointer
+    transition-colors duration-300
+    ${
+      scrolled
+        ? "text-black hover:text-black/70"
+        : "text-[#213D34] hover:text-black/80"
+    }
+  `}
+          >
+            Sign In
+          </button>
 
-          {/* RIGHT — ACTION */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button variant="outline" className="px-5 py-2 text-sm">
-              Sign In
-            </Button>
+          {/* DIVIDER – DESKTOP ONLY */}
+          <span
+            className={`hidden md:block ${
+              scrolled ? "text-black/40" : "text-white/40"
+            }`}
+          >
+            |
+          </span>
 
-            <Button className="px-5 py-2 text-sm bg-[#D9CBA6] text-[#276749]">
-              Daftar
-            </Button>
-          </div>
+          {/* MENU BUTTON – ALWAYS */}
+          <button
+            onClick={onMenuClick}
+            className={`
+              px-3 sm:px-4 py-1.5
+              rounded-full font-semibold text-sm
+              border transition-all duration-300 cursor-pointer
+              ${
+                scrolled
+                  ? "bg-black text-white border-black hover:bg-transparent hover:text-black"
+                  : "bg-white text-black border-white hover:bg-transparent hover:text-white"
+              }
+            `}
+          >
+            ☰ <span className="hidden sm:inline">Menu</span>
+          </button>
         </div>
       </div>
     </nav>

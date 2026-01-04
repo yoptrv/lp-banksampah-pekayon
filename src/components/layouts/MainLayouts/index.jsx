@@ -1,11 +1,16 @@
+import { useState } from "react";
 import Navbar from "@/components/fragments/Navbar";
+import SideMenu from "../SideMenu";
 import Footer from "@/components/fragments/Footer";
 
 export default function MainLayout({ children }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <>
-      <Navbar />
-      <main className="pt-24 md:pt-28">{children}</main>
+      <Navbar onMenuClick={() => setMenuOpen(true)} />
+      <SideMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      {children}
       <Footer />
     </>
   );
