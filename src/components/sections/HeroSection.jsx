@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen w-full overflow-hidden pb-64 md:pb-40">
       <Image
-        src="/wallpapers.png"
+        src="/banner/bg1.png"
         alt="Bank Sampah Pekayon"
         fill
         priority
@@ -22,7 +22,7 @@ export default function Hero() {
 
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex items-start pt-28 md:pt-56">
         <div className="text-white max-w-3xl">
-          <p className="mb-4 text-sm font-bold text-[#213D34]">
+          <p className="mb-4 text-sm font-bold text-black/70">
             Program lingkungan, Pekayon
           </p>
 
@@ -41,7 +41,7 @@ export default function Hero() {
                 border border-black/20
                 transition-all duration-200
 
-                hover:bg-transparent hover:!text-white
+                hover:bg-transparent hover:!text-[#213D34]
 
                 active:bg-white active:!text-black active:border-white
             "
@@ -64,7 +64,7 @@ export default function Hero() {
               }}
               className="
                 px-8 py-4 rounded-full font-semibold
-                bg-transparent cursor-pointer
+                bg-transparent cursor-pointer !text-[#213D34]
                 border border-black/20
                 transition-all duration-200
 

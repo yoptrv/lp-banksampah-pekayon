@@ -11,7 +11,7 @@ export default function CategoryPage() {
       {/* BACKGROUND */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/background-rand.png"
+          src="/banner/background-rand.png"
           alt="Kategori Sampah"
           fill
           className="object-cover"

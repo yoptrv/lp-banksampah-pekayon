@@ -5,17 +5,19 @@ import ChatbotAI from "../ChatbotAi";
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
-  const [mode, setMode] = useState(null); // null | "ai"
+  const [mode, setMode] = useState(null); 
   const [showHint, setShowHint] = useState(false);
 
-  // Auto welcome bubble
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowHint(true);
-    }, 3000);
+  
+ useEffect(() => {
+   if (window.innerWidth < 768) return;
+   const timer = setTimeout(() => {
+     setShowHint(true);
+   }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+   return () => clearTimeout(timer);
+ }, []);
+
 
   const socials = [
     {
@@ -42,7 +44,19 @@ export default function ChatWidget() {
     <>
       {/* WELCOME HINT */}
       {showHint && !open && (
-        <div className="fixed bottom-24 right-24 z-40 bg-white px-4 py-2 rounded-xl shadow-lg text-sm text-gray-700 animate-fade-in">
+        <div
+          className="
+    fixed z-40
+    bottom-20 right-6
+    md:bottom-24 md:right-24
+    bg-white px-3 py-1
+    md:px-4 md:py-2
+    rounded-xl shadow-lg
+    text-xs md:text-sm
+    text-gray-700
+    animate-fade-in
+  "
+        >
           👋 Butuh bantuan?
         </div>
       )}
@@ -95,7 +109,7 @@ export default function ChatWidget() {
               <RiRobot2Line className="text-2xl" />
             </button>
             <span className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs bg-black text-white px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition">
-              Live Chat 
+              Live Chat
             </span>
           </div>
 

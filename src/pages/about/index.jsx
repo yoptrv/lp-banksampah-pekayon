@@ -7,7 +7,7 @@ export default function ProfilPage() {
           {/* BACKGROUND */}
           <div className="absolute inset-0 -z-10">
             <Image
-              src="/background-rand.png"
+              src="/banner/background-rand.png"
               alt="Kategori Sampah"
               fill
               className="object-cover"
@@ -60,7 +60,7 @@ export default function ProfilPage() {
 
           <div className="relative h-[320px] rounded-3xl overflow-hidden">
             <Image
-              src="/bs.jpg"
+              src="/banner/bs.jpg"
               alt="Bank Sampah"
               fill
               className="object-cover"
