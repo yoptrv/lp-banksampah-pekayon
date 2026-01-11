@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
-import { Clock, Recycle, MapPin, Calendar, ArrowUpRight } from "lucide-react";
+import { Recycle, MapPin, Calendar, ArrowUpRight, Clock } from "lucide-react";
 import { RiHome2Fill } from "react-icons/ri";
 
 export default function JadwalSection() {
-  const [now, setNow] = useState(null);
   const [schedules, setSchedules] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  /* ===============================
-     REALTIME CLOCK
-  =============================== */
-  useEffect(() => {
-    const update = () => setNow(new Date());
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   /* ===============================
      FETCH API
@@ -107,30 +96,18 @@ export default function JadwalSection() {
             </p>
           </div>
 
-          {/* REALTIME */}
-          {now && (
-            <div className="mb-12 flex justify-center">
-              <div className="bg-white/90 backdrop-blur border rounded-2xl px-6 py-4 shadow-sm flex gap-4">
-                <Clock size={36} />
-                <div>
-                  <p className="text-sm font-semibold">
-                    {now.toLocaleDateString("id-ID", {
-                      weekday: "long",
-                      day: "numeric",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  </p>
-                  <p className="text-2xl font-bold text-green-900">
-                    {now.toLocaleTimeString("id-ID")}
-                  </p>
-                </div>
-              </div>
-            </div>
+          {/* LOADING */}
+          {loading && (
+            <p className="text-center text-gray-500">Memuat jadwal...</p>
           )}
 
-          {/* MAP CARDS (TODAY LOCATIONS) */}
-          {!loading && uniqueAddresses.length > 0 && (
+          {/* ERROR */}
+          {!loading && error && (
+            <p className="text-center text-red-500">Gagal memuat data jadwal</p>
+          )}
+
+          {/* MAP CARDS – TODAY */}
+          {!loading && !error && uniqueAddresses.length > 0 && (
             <div className="mb-14 grid gap-6 sm:grid-cols-2">
               {uniqueAddresses.map((address, i) => (
                 <a
@@ -157,11 +134,9 @@ export default function JadwalSection() {
                       <p className="text-sm text-gray-500">
                         Lokasi Bank Sampah Hari Ini
                       </p>
-
                       <p className="mt-1 text-lg md:text-xl font-bold text-gray-900 leading-snug">
                         {address}
                       </p>
-
                       <div className="mt-4 inline-flex items-center gap-2 text-green-700 font-semibold">
                         Buka Google Maps
                         <ArrowUpRight size={18} />
@@ -173,66 +148,63 @@ export default function JadwalSection() {
             </div>
           )}
 
-          {/* NO SCHEDULE TODAY */}
-          {!loading && uniqueAddresses.length === 0 && (
-            <p className="mb-12 text-center text-orange-700 font-semibold">
-              ⚠️ Tidak ada jadwal setor sampah hari ini
-            </p>
-          )}
+          {/* INFO – NO TODAY SCHEDULE */}
+          {!loading &&
+            !error &&
+            schedules.length > 0 &&
+            uniqueAddresses.length === 0 && (
+              <p className="mb-12 text-center text-orange-700 font-semibold">
+                ⚠️ Tidak ada jadwal setor sampah hari ini
+              </p>
+            )}
 
           {/* TABLE HEADER */}
-          <div className="hidden md:grid grid-cols-4 gap-4 px-6 mb-3 text-sm font-semibold">
-            <div className="flex items-center gap-2">
-              <Calendar size={16} /> Tanggal
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock size={16} /> Jam
-            </div>
-            <div className="flex items-center gap-2">
-              <Recycle size={16} /> Kegiatan
-            </div>
-            <div className="flex items-center gap-2">
-              <MapPin size={16} /> Lokasi
-            </div>
-          </div>
-
-          {/* STATES */}
-          {loading && (
-            <p className="text-center text-gray-500">Memuat jadwal...</p>
-          )}
-          {error && (
-            <p className="text-center text-red-500">Gagal memuat data jadwal</p>
-          )}
-
-          {/* TABLE BODY */}
-          {!loading && !error && (
-            <div className="space-y-4">
-              {schedules.map((item) => (
-                <div
-                  key={item.schedule_id}
-                  className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white border border-green-100 rounded-2xl px-6 py-5 shadow-sm"
-                >
-                  <div className="font-semibold text-green-800">
-                    {formatFullDate(item.date)}
-                  </div>
-
-                  <div className="text-sm flex items-center gap-2">
-                    <Clock size={14} />
-                    {formatTime(item.start_time, item.end_time)}
-                  </div>
-
-                  <div className="text-sm flex items-center gap-2">
-                    <Recycle size={14} />
-                    {item.title}
-                  </div>
-
-                  <div className="text-sm flex items-center gap-2">
-                    <MapPin size={14} />
-                    {item.rw_list?.address || "-"}
-                  </div>
+          {!loading && !error && schedules.length > 0 && (
+            <>
+              <div className="hidden md:grid grid-cols-4 gap-4 px-6 mb-3 text-sm font-semibold">
+                <div className="flex items-center gap-2">
+                  <Calendar size={16} /> Tanggal
                 </div>
-              ))}
-            </div>
+                <div className="flex items-center gap-2">
+                  <Clock size={16} /> Jam
+                </div>
+                <div className="flex items-center gap-2">
+                  <Recycle size={16} /> Kegiatan
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin size={16} /> Lokasi
+                </div>
+              </div>
+
+              {/* TABLE BODY */}
+              <div className="space-y-4">
+                {schedules.map((item) => (
+                  <div
+                    key={item.schedule_id}
+                    className="grid grid-cols-1 md:grid-cols-4 gap-4 bg-white border border-green-100 rounded-2xl px-6 py-5 shadow-sm"
+                  >
+                    <div className="font-semibold text-green-800">
+                      {formatFullDate(item.date)}
+                    </div>
+
+                    <div className="text-sm flex items-center gap-2">
+                      <Clock size={14} />
+                      {formatTime(item.start_time, item.end_time)}
+                    </div>
+
+                    <div className="text-sm flex items-center gap-2">
+                      <Recycle size={14} />
+                      {item.title}
+                    </div>
+
+                    <div className="text-sm flex items-center gap-2">
+                      <MapPin size={14} />
+                      {item.rw_list?.address || "-"}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
           )}
 
           {/* FOOTNOTE */}

@@ -22,11 +22,11 @@ export default function Hero() {
 
       <div className="relative z-10 h-full max-w-7xl mx-auto px-6 flex items-start pt-28 md:pt-56">
         <div className="text-white max-w-3xl">
-          <p className="mb-4 text-sm font-bold text-black/70">
+          <p className="mb-4 text-sm font-bold text-[#213D34]">
             Program lingkungan, Pekayon
           </p>
 
-          <h1 className="text-5xl md:text-7xl font-bold leading-tight text-[#213D34]/90 ">
+          <h1 className="text-5xl md:text-7xl font-bold leading-tight text-[#213D34]/80">
             Bank Sampah
             <br />
             Pekayon
@@ -36,19 +36,18 @@ export default function Hero() {
             <Link
               href="/contact"
               className="
-                px-8 py-4 rounded-full font-semibold
-                bg-white/60 !text-black
-                border border-black/20
-                transition-all duration-200
+            w-full sm:w-auto text-left
+            px-8 py-4 rounded-full font-semibold
+            bg-white/60 !text-black
+            border border-black/20
+            transition-all duration-200
 
-                hover:bg-transparent hover:!text-[#213D34]
-
-                active:bg-white active:!text-black active:border-white
-            "
+            hover:bg-transparent hover:!text-[#213D34]
+            active:bg-white active:!text-black active:border-white
+          "
             >
-              Tanya Kami
+              Masuk
             </Link>
-
             <button
               onClick={async () => {
                 if (router.pathname !== "/") {
@@ -63,15 +62,15 @@ export default function Hero() {
                 }, 300);
               }}
               className="
-                px-8 py-4 rounded-full font-semibold
-                bg-transparent cursor-pointer !text-[#213D34]
-                border border-black/20
-                transition-all duration-200
+                  w-full sm:w-auto text-left
+                  px-8 py-4 rounded-full font-semibold
+                  bg-transparent cursor-pointer !text-[#213D34]
+                  border border-black/20
+                  transition-all duration-200
 
-                hover:bg-white/60 hover:!text-black/70
-
-                active:bg-white active:!text-black active:border-white
-            "
+                  hover:bg-white/60 hover:!text-black/70
+                  active:bg-white active:!text-black active:border-white
+                "
             >
               Cara Kerja
             </button>
