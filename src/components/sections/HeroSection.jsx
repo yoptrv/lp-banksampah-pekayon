@@ -74,7 +74,7 @@ export default function Hero() {
 
           <div className="mt-10 flex flex-col sm:flex-row gap-2">
             <Link
-              href="/contact"
+              href="https://wargabanksampahpekayon.vercel.app/login"
               className="
                 w-full sm:w-auto text-left
                 px-8 py-4 rounded-full font-semibold
