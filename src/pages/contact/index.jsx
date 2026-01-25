@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { RiHome2Fill } from "react-icons/ri";
-
+import emailjs from "@emailjs/browser";
 
 export default function ContactPage() {
   const [loading, setLoading] = useState(false);
@@ -12,25 +12,30 @@ export default function ContactPage() {
     setLoading(true);
 
     const form = e.target;
-    const data = {
-      name: form.name.value,
-      phone: form.phone.value,
-      email: form.email.value,
-      message: form.message.value,
-    };
 
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
+    try {
+      const res = await emailjs.send(
+        "service_dxq0ugr", 
+        "template_emy1d3a", 
+        {
+          name: form.name.value,
+          phone: form.phone.value,
+          email: form.email.value,
+          message: form.message.value,
+        },
+        "ChHdkA5pwdsMI3bVl", 
+      );
+
+      if (res.status === 200) {
+        setSuccess(true);
+        form.reset();
+      }
+    } catch (err) {
+      console.log("Email error:", err);
+      alert("Gagal mengirim pesan.");
+    }
 
     setLoading(false);
-
-    if (res.ok) {
-      setSuccess(true);
-      form.reset();
-    }
   };
 
   return (
@@ -80,10 +85,7 @@ export default function ContactPage() {
 
               <ul className="space-y-4 text-sm">
                 <li className="flex items-center gap-2">
-                  📞 <span>+62 812-xxxx-xxxx</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  📧 <span>banksampahpekayon@gmail.com</span>
+                  📧 <span>rahmatrizkyrifai@gmail.com</span>
                 </li>
                 <li className="flex items-center gap-2">
                   📍 <span>Kelurahan Pekayon, Jakarta Timur</span>

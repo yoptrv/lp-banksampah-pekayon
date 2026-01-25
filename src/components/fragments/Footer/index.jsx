@@ -68,8 +68,8 @@ export default function Footer() {
             </span>
 
             <ul className="space-y-3 text-sm text-gray-300 max-w-sm mx-auto md:mx-0">
-              <li>Email: xxxxx@gmail.com</li>
-              <li>Telepon: (021) 12345678</li>
+              <li>Email: kel_pekayon@jakarta.go.id</li>
+              <li>Telepon: (+62) 857-7402-5605</li>
               <li>
                 Jl. Madrasah No.3, RT.3/RW.9, Pekayon, Kec. Ps. Rebo, Kota
                 Jakarta Timur, DKI Jakarta 13710
@@ -112,7 +112,7 @@ export default function Footer() {
         {/* BOTTOM  */}
         <div className="border-t border-gray-700 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
           <p className="text-xs text-gray-400">
-            © 2025 PTelus. All Rights Reserved.
+            © 2025 PTElus. All Rights Reserved.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center gap-4 text-gray-400">

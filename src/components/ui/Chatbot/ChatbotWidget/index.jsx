@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaWhatsapp, FaInstagram, FaTelegramPlane } from "react-icons/fa";
+import { FaWhatsapp, FaInstagram, FaTelegramPlane, FaFacebook } from "react-icons/fa";
 import { RiRobot2Line } from "react-icons/ri";
 import ChatbotAI from "../ChatbotAi";
 
@@ -21,22 +21,22 @@ export default function ChatWidget() {
 
   const socials = [
     {
-      label: "WhatsApp",
-      icon: <FaWhatsapp className="text-green-500 text-xl" />,
-      href: "https://wa.me/62xxxxxxxxxx",
-      bg: "bg-green-50 hover:bg-green-100",
-    },
-    {
-      label: "Telegram",
-      icon: <FaTelegramPlane className="text-sky-500 text-xl" />,
-      href: "https://t.me/username",
+      label: "Facebook",
+      icon: <FaFacebook className="text-sky-500 text-xl" />,
+      href: "https://www.facebook.com/kelurahanpekayon.pasarrebo",
       bg: "bg-sky-50 hover:bg-sky-100",
     },
     {
       label: "Instagram",
       icon: <FaInstagram className="text-pink-500 text-xl" />,
-      href: "https://instagram.com/username",
+      href: "https://www.instagram.com/kelurahan_pekayon",
       bg: "bg-pink-50 hover:bg-pink-100",
+    },
+    {
+      label: "WhatsApp",
+      icon: <FaWhatsapp className="text-green-500 text-xl" />,
+      href: "https://api.whatsapp.com/send?phone=6285774025605",
+      bg: "bg-green-50 hover:bg-green-100",
     },
   ];
 

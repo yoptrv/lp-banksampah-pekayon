@@ -176,19 +176,23 @@ export default function SideMenu({ open, onClose }) {
               <div className="ml-12 mt-4 space-y-3">
                 <button
                   onClick={() =>
-                    handleLogin("https://admin-bank-sampah.example.com")
+                    handleLogin(
+                      "https://bank-sampah-pekayon-fe-rw-kelurahan.vercel.app",
+                    )
                   }
                   className="block text-xl text-white/60 hover:text-white transition cursor-pointer"
                 >
-                 - Admin
+                  - Kelurahan / RW
                 </button>
                 <button
                   onClick={() =>
-                    handleLogin("https://anggota-bank-sampah.example.com")
+                    handleLogin(
+                      "https://wargabanksampahpekayon.vercel.app/login",
+                    )
                   }
                   className="block text-xl text-white/60 hover:text-white transition cursor-pointer"
                 >
-                  - Anggota
+                  - Warga
                 </button>
               </div>
             )}
