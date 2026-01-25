@@ -64,7 +64,7 @@ export default function ContactPage() {
           <div className="relative rounded-2xl overflow-hidden text-white p-8 min-h-[420px] flex flex-col justify-between">
             {/* BACKGROUND IMAGE */}
             <Image
-              src="/contact.jpg"
+              src="/banner/contact.jpg"
               alt="Bank Sampah Pekayon"
               fill
               className="object-cover"
